@@ -26,3 +26,10 @@ jobs:
 
       - name: Subir imagen a Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/hola-devops:latest
+
+      - name: Desplegar en Render
+        run: |
+          curl -X POST \
+            -H "Accept: application/json" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys
